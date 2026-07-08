@@ -1,0 +1,18 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "permissions": {
+    "edit": "ask",
+    "bash": "ask",
+    "bash_rm *": "deny",
+    "bash_git push*": "deny",
+    "fetch": "ask"
+  },
+  "agents": {
+    "build": {
+      "model": "anthropic/claude-sonnet-5"
+    },
+    "plan": {
+      "model": "anthropic/claude-sonnet-5"
+    }
+  }
+}
