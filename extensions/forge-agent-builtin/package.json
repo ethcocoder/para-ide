@@ -1,0 +1,55 @@
+{
+	"name": "forge-agent-builtin",
+	"displayName": "Forge AI Agent",
+	"description": "Built-in AI agent for Forge IDE powered by OpenCode",
+	"version": "0.0.1",
+	"publisher": "forge",
+	"engines": {
+		"vscode": "^1.90.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onStartupFinished"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "forge-agent",
+					"title": "Forge Agent",
+					"icon": "media/icon.svg"
+				}
+			]
+		},
+		"views": {
+			"forge-agent": [
+				{
+					"id": "forge-agent-chat",
+					"name": "Agent Chat"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "forge-agent.ask",
+				"title": "Ask Forge Agent"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.90.0",
+		"@types/node": "^20.x",
+		"typescript": "^5.x"
+	},
+	"dependencies": {
+		"@opencode-ai/sdk": "latest"
+	}
+}
