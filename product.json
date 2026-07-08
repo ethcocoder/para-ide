@@ -41,7 +41,23 @@
 		"controlUrl": "",
 		"recommendationsUrl": ""
 	},
-	"builtInExtensions": [
+		"builtInExtensions": [
+			{
+				"name": "forge-agent-builtin",
+				"version": "0.0.1",
+				"sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+				"repo": "https://github.com/ethcocoder/para-ide",
+				"metadata": {
+					"id": "forge-agent-builtin",
+					"publisherId": {
+						"publisherId": "forge",
+						"publisherName": "forge",
+						"displayName": "Forge",
+						"flags": ""
+					},
+					"publisherDisplayName": "Forge"
+				}
+			},
 		{
 			"name": "ms-vscode.js-debug-companion",
 			"version": "1.1.3",

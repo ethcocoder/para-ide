@@ -1,13 +1,34 @@
 import * as vscode from 'vscode';
+import { OpenCodeService } from './OpenCodeService';
+import { AgentPanelViewProvider } from './AgentPanelViewProvider';
 
-export function activate(context: vscode.ExtensionContext) {
-	console.log('Forge Agent extension is now active!');
+export async function activate(context: vscode.ExtensionContext) {
+    console.log('Forge Agent extension is now active!');
 
-	let disposable = vscode.commands.registerCommand('forge-agent.ask', () => {
-		vscode.window.showInformationMessage('Hello from Forge Agent!');
-	});
+    const openCodeService = new OpenCodeService();
+    const provider = new AgentPanelViewProvider(context.extensionUri);
 
-	context.subscriptions.push(disposable);
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider(AgentPanelViewProvider.viewType, provider)
+    );
+
+    let disposable = vscode.commands.registerCommand('forge-agent.ask', () => {
+        vscode.commands.executeCommand('forge-agent-chat.focus');
+    });
+
+    context.subscriptions.push(disposable);
+
+    // Start OpenCode server
+    try {
+        await openCodeService.start();
+        vscode.window.showInformationMessage('Forge Agent (OpenCode) is ready.');
+    } catch (err) {
+        vscode.window.showErrorMessage('Failed to start Forge Agent server.');
+    }
+
+    context.subscriptions.push({
+        dispose: () => openCodeService.stop()
+    });
 }
 
 export function deactivate() {}
